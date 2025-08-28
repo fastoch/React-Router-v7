@@ -37,8 +37,17 @@ build your app within" (framework).
 - The project is created using **Vite**.  
 - in the `vite.config.ts` file, we can see it generates the application using **TailwindCSS**
 - there's also a **`Dockerfile`**, so we can deploy our app using Docker
-- 
+
+## The `root.tsx` file
+
+This file is the entry point of our application.  
+
+The `App` component is declared in this `/app/root.tsx` file.  
+By default, the `App` function returns an `<Outlet />`, which is a component **placeholder** for any 
+components that will represent the different **pages** in our application (the different **routes**).  
+
+
 
 
 ---
-@4/51
+@6/51
