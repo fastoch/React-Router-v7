@@ -32,6 +32,13 @@ build your app within" (framework).
 - run `npx create-react-router@latest .` (the `.` is to create the project in the current directory)
 - once the project has been created, run `npm run dev` to start the development server
 
+# The structure of a React Router v7 application
+
+- The project is created using **Vite**.  
+- in the `vite.config.ts` file, we can see it generates the application using **TailwindCSS**
+- there's also a **`Dockerfile`**, so we can deploy our app using Docker
+- 
+
 
 ---
-@2/51
+@4/51
