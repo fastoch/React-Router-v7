@@ -40,11 +40,25 @@ build your app within" (framework).
 
 ## The `root.tsx` file
 
-This file is the **entry point** of our application.  
+This file, located in the `app` folder, is the **entry point** of our application.  
 
-The `App` component is declared in this `/app/root.tsx` file.  
+The `App` component is now being declared in this `/app/root.tsx` file, and exported from there.  
+The `App` remains the main component for the root route `/`.  
+
 By default, the `App` function returns an `<Outlet />`, which is a component **placeholder** for any 
 components that will represent the different **pages** in our application (the different **routes**).  
+
+## The `<Outlet />` component
+
+By returning `<Outlet />`, the `App` itself doesn't render any visible content.  
+Instead, it delegates the rendering to one of its **child** routes.  
+
+The `<Outlet />` tells the router where to render the UI for any matching child routes.  
+When we navigate to a URL that matches a nested route (for example, `/about` or `/products/123`), 
+`react-router` will render the component for that specific route in place of the `<Outlet />`.  
+
+We can think of it as a frame. The `Layout` and `App` components provide the overall structure and frame for our application,  
+and the `<Outlet />` is the space where the content of the **currently active** page is displayed.
 
 ---
 
@@ -58,43 +72,71 @@ The file is only meant to be used to define the pattern of how our routing syste
 In the `/app/routes` folder, we have a `home.tsx` file by default, which is the same file that is 
 used in `routes.ts`:
 ```ts
-export default [index("routes/home.tsx")] satisfies RouteConfig;
+export default [
+  index("routes/home.tsx")
+] satisfies RouteConfig;
 ```
 
 The above line is the core of our application's routing configuration.  
-It tells React Router what component to show for the main, or "index", route.  
+It tells `react-router` what component to show for the main (or "index") route.  
 
-It's exporting an **array** that will contain all your **route definitions**.  
-Other parts of the React Router framework will import this **array** to build the application's **navigation**.  
+It's exporting an **array** that will contain all our **route definitions**.  
+Other parts of the `react-router`framework will import this **array** to build the application's **navigation**.  
 
-`index()` is a helper function provided by the React Router framework.  
-Its purpose is to define an **index** route.  
+`index()` is a helper function provided by the `react-router` framework.  
+Its purpose is to define an **index** route, the initial route for our app.  
 
 An index route is the **default** component that gets rendered when a user navigates to the **parent** route's path.  
-Since this is at the **top level** of your configuration, it represents the root of your website (i.e., the path `/`).  
+Since this is at the **top level** of our configuration, it represents the root of our website (i.e. the path `/`).  
 
-When a user visits your site's homepage, React Router will render the component exported from `/app/routes/home.tsx`.  
+When a user visits our site's homepage, `react-router` will render the component exported from `/app/routes/home.tsx`.  
 
 To **summarize**, this `routes.ts` file defines the application's routes, starting with the main **homepage**.  
-It specifies that for the root URL (/), the component from the `routes/home.tsx` file should be rendered.  
-Finally, it uses a TypeScript operator (`satisfies`) to validate that this configuration is structured correctly.
+It specifies that for the root URL (`/`), the component from the `routes/home.tsx` file should be rendered.  
+Finally, it uses a TypeScript operator (`satisfies`) to validate that the configuration is structured correctly.  
 
 As we add more pages to our application, we will add more route definitions to this array.  
 
+---
+
 ## Adding more routes
 
-We first need to import the `route` package from the same source in `routes.ts`:
+1. We first need to import the `route` package from the same source in `routes.ts`:
 ```ts
 import { type RouteConfig, index, route } from "@react-router/dev/routes";
 ```
 
-Then, we can add another route using the `route` function:
+2. Then, we can add another route using the `route()` function:
 ```ts
-export default [index("routes/home.tsx"), route()] satisfies RouteConfig;
+export default [
+  index("routes/home.tsx"), 
+  route()
+] satisfies RouteConfig;
 ```
 
+3. To create the new route, we need to create a new file in our `routes` folder. We'll name it `about.tsx`:
+```tsx
+export default function About() {
+  return <div>Hey, welcome to the about page!</div>;
+};
+```
+
+4. Finally, we can add the new route as a parameter to the `route()` function:
+```ts
+export default [
+  index("routes/home.tsx"), 
+  route("/about", "routes/about.tsx")
+] satisfies RouteConfig;
+```
+
+As you see, we actually need to pass 2 parameters to the `route()` function: the path and the file.  
+While the `index()` function only requires 1 parameter: the file.  
+
+---
+
+## How to define routes that accept parameters to their route definition?
 
 
 
 ---
-@8/51
+@10/51
