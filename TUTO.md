@@ -157,11 +157,19 @@ export default [
 
 ```
 
-## Importante note
+## The `loader` and `action` functions
 
 **Every** component in React Router version 7 is going to require a **loader** function and an **action** function.  
+These functions have to be named `loader` and `action` in order for `react-router` to recognize them as such.  
+
+As the name indicates, the loader will be responsible for loading data from an API, or from different parts of our app.  
+
+---
+
+## How to create nested routes?
+
 
 
 
 ---
-@13/51
+@16/51
