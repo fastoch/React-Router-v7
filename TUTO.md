@@ -168,8 +168,58 @@ As the name indicates, the loader will be responsible for loading data from an A
 
 ## How to create nested routes?
 
+1. Create new routes: `dashboard.tsx`, `finances.tsx` and `personal-info.tsx`  
+
+2. `finances` and `personal-info` will be children of the `dashboard` route
+
+3. we need to declare the new dashboard route in `routes.ts`
+
+4. we add the `<Outlet/>` component to the dashboard component (it will host the child routes):
+```tsx
+import { Outlet } from "react-router";
+
+export default function Dashboard() {
+  return (
+    <div>
+      {" "}
+      Hey, welcome to the dashboard page!
+      <Outlet />
+    </div>
+  )
+};
+```
+
+5. finally, we add an array of child routes to the dashboard route as a third parameter to the `route()` function:
+
+```ts
+// Nested Routes
+route("/dashboard", "routes/dashboard.tsx", [
+  route("finances", "routes/finances.tsx"),
+  route("personal-info", "routes/personal-info.tsx"),
+]),
+```
+
+---
+
+## Using Layouts for nested routes
+
+We can do nested routes without adding any segment to the URL.  
+For example, `localhost:5173/dashboard/finances` becomes `localhost:5173/finances`.  
+
+To do that, we just need to turn the dashboard `route` into a `layout`:
+```ts
+// Nested Routes
+layout("routes/dashboard.tsx", [
+  route("finances", "routes/finances.tsx"),
+  route("personal-info", "routes/personal-info.tsx"),
+]),
+```
+As you can see, we also had to remove the first parameter (the path) from the `layout` function.  
+And of course, we also had to import the `layout` component from `"@react-router/dev/routes"`.  
+
+This will display the same UI elements as before: the dashboard component AND the child component.  
 
 
 
 ---
-@16/51
+@20/51
