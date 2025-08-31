@@ -136,7 +136,32 @@ While the `index()` function only requires 1 parameter: the file.
 
 ## How to define routes that accept parameters to their route definition?
 
+1. Inside the `routes` folder, create a file named `post.tsx`
+
+2. Modify `routes.ts` to add the new route:
+```ts
+export default [
+  index("routes/home.tsx"), 
+  route("/about", "routes/about.tsx"),
+  route("/post/:id", "routes/post.tsx")
+] satisfies RouteConfig;
+```
+
+3. Define the **loader** function inside `post.tsx` that will load data into the component:
+```tsx
+
+```
+
+4. Define the action function inside `post.tsx`:
+```tsx
+
+```
+
+## Importante note
+
+**Every** component in React Router version 7 is going to require a **loader** function and an **action** function.  
+
 
 
 ---
-@10/51
+@13/51
