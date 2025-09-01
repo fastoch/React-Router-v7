@@ -219,7 +219,30 @@ And of course, we also had to import the `layout` component from `"@react-router
 
 This will display the same UI elements as before: the dashboard component AND the child component.  
 
+---
+
+# Rendering strategies: Client vs Server
+
+React router supports multiple rendering strategies.  
+By default, it uses server-side rendering.  
+
+To enable client-side rendering, open the `react-router.config.ts` file and set the `ssr` property to `false`:  
+```ts
+import type { Config } from "@react-router/dev/config";
+
+export default {
+  // Config options...
+  // Server-side render by default, to enable SPA mode set this to `false`
+  ssr: true,
+} satisfies Config;
+```  
+
+## Benefits of server-side rendering (SSR)
+
+https://www.perplexity.ai/search/benefits-of-server-side-render-jrFf2y6XSwalWOo87y.lJw
+
+
 
 
 ---
-@20/51
+@24/51
