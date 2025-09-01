@@ -237,9 +237,10 @@ export default {
 } satisfies Config;
 ```  
 
-## Static pre-rendering
+## 3rd option:Static pre-rendering
 
-This is the **third** option. It generates static HTML and data payloads at **build** time.  
+It generates static HTML and data payloads at **build** time.  
+
 Pre-rendering is a build time operation that allows us to generate static HTML, which is very 
 useful for both **SEO** and **performance**.  
 
@@ -259,14 +260,27 @@ export default {
 
 This pre-render function returns an array of the different routes that we want to pre-render.  
 
-Static pre-rendering is a great option 
+Static pre-rendering is a great option for static or infrequently updated content, like landing pages or documentation sites.
+
+More details on SSR vs CSR vs pre-rendering:  
+https://blog.logrocket.com/csr-ssr-pre-rendering-which-rendering-technique-choose/
 
 ## Benefits of server-side rendering (SSR)
 
 https://www.perplexity.ai/search/benefits-of-server-side-render-jrFf2y6XSwalWOo87y.lJw
 
+---
 
+# Loading Data in React Router v7
+
+We previously talked about the `loader` and `action` functions in the `post.tsx` component.  
+But the `loader` should actually be used to fetch data for SSR, or for pre-rendering.  
+
+In our example, we were fetching data from a public API, so it was not SSR or pre-rendering.  
+And in such cases, we need to use a `clientLoader` instead of a `loader`.  
+
+So we need to rename the `loader` function to `clientLoader` in our `post.tsx` component.  
 
 
 ---
-@26/51
+@28/51

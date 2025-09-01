@@ -1,6 +1,6 @@
 import type { Route } from "./+types/post";
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function clientLoader({ params }: Route.LoaderArgs) {
   const postId = params.postId;
   const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`);
   const post = await response.json();
