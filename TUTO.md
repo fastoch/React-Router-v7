@@ -237,6 +237,30 @@ export default {
 } satisfies Config;
 ```  
 
+## Static pre-rendering
+
+This is the **third** option. It generates static HTML and data payloads at **build** time.  
+Pre-rendering is a build time operation that allows us to generate static HTML, which is very 
+useful for both **SEO** and **performance**.  
+
+To do that, we have to disable SSR and define a **pre-render function** in `react-router.config.ts`:
+```ts
+import type { Config } from "@react-router/dev/config";
+
+export default {
+  // Config options...
+  // Server-side render by default, to enable SPA mode set this to `false`
+  // ssr: true,
+  async prerender() {
+    return ["/", "/about", "/personal-info", "/finances"]
+  }
+} satisfies Config;
+```
+
+This pre-render function returns an array of the different routes that we want to pre-render.  
+
+Static pre-rendering is a great option 
+
 ## Benefits of server-side rendering (SSR)
 
 https://www.perplexity.ai/search/benefits-of-server-side-render-jrFf2y6XSwalWOo87y.lJw
@@ -245,4 +269,4 @@ https://www.perplexity.ai/search/benefits-of-server-side-render-jrFf2y6XSwalWOo8
 
 
 ---
-@24/51
+@26/51
